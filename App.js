@@ -1,22 +1,26 @@
 import React from "react"
 import ReactDOM from "react-dom";
 
-const parent=React.createElement("div",
-{id:"Parent"},
-React.createElement("div",{id:"child"},
-[ React.createElement("h1",{},"This is namaste react 😅"),
-React.createElement("h2",{},"I am h2 tag")
-]),
-React.createElement("div",{id:"child2"},
-[ React.createElement("h1",{},"I am h1 tag"),
-React.createElement("h2",{},"I am h2 tag")
-])
-)
-const heading= React.createElement("h1",
-{id:"heading"},"Hello World from JavaScript"
+// const heading=React.createElement(
+//     "h1",{id:"heading"},
+//     "Namaste React 🚀"
+// )
+let number=1000
+const Heading=()=>(
+   <h1>Heading</h1>,
+   {Title},
+   <h2>{number+1}</h2>
 )
 
-const root=ReactDOM.createRoot(document.getElementById("root"));
+const Title= ()=>(
+    <div>
+       { Heading()},
+       <Heading></Heading>,
+       <Heading />,
+        <h1>title</h1>
+    </div>
+)
 
-root.render(parent);
-console.log(parent)
+// const heading2= <h1>Namaste React 🚀</h1>
+const root=ReactDOM.createRoot(document.getElementById("root"))
+root.render(<Title />)

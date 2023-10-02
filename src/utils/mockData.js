@@ -1,47 +1,3 @@
-import React from "react"
-import ReactDOM from "react-dom/client";
-
-/*Header
-    Logo 
-    Nav Items
-Body
-    Search
-    restaurant container
-        restaurant cart
-Footer
-    Links
-    address
-    contact
-*/
-
-const AppLayout=()=>{
-    return(
-        <div className="applayout">
-            <Header />
-            <Body />
-            <Footer />
-        </div>
-    )
-}
-
-const Header=()=>{
-    return(
-        <div className="header">
-            <div>
-                <img className="logo" src="https://images-platform.99static.com/O3ZHfJeHB741xpyYH95tWvMsdTI=/0x0:1279x1279/500x500/top/smart/99designs-contests-attachments/63/63966/attachment_63966256"></img>
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About US</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-
 const restaurantList= 
 [
     {
@@ -52,6 +8,7 @@ const restaurantList=
             "locality": "Hingane Khurd",
             "areaName": "Sinhgad Road",
             "costForTwo": "₹400 for two",
+            "Veg":"Veg",
             "cuisines": [
                 "Pizzas",
                 "Italian",
@@ -139,6 +96,7 @@ const restaurantList=
             "locality": "Haveli",
             "areaName": "Sinhgad Road",
             "costForTwo": "₹400 for two",
+            "Veg":"Veg",
             "cuisines": [
                 "Burgers",
                 "Beverages",
@@ -233,6 +191,7 @@ const restaurantList=
             "cloudinaryImageId": "56c9ab92bd79745fd152a30fa2525426",
             "locality": "Deshpande Nagar",
             "areaName": "Sinhgad Road",
+            "Veg":"Non-Veg",
             "costForTwo": "₹400 for two",
             "cuisines": [
                 "Burgers",
@@ -330,6 +289,7 @@ const restaurantList=
             "locality": "Mohite Paradise",
             "areaName": "Sinhagad Road",
             "costForTwo": "₹350 for two",
+            "Veg":"Non-Veg",
             "cuisines": [
                 "Burgers",
                 "American"
@@ -913,50 +873,5 @@ const restaurantList=
         "widgetId": "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
     }
 ]
-  
 
-
-
-const RestaurantCard=({resData})=>{
-const {cloudinaryImageId,name,cuisines,avgRating,costForTwo, }=resData?.info
-const {deliveryTime}=resData?.info?.sla
-    return(
-        <div className="restaurant-card">
-          <img className="restaurant-images" 
-          src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+ cloudinaryImageId}>
-          </img>
-            <h3>{name}</h3>
-            <h4>{cuisines.join(",")}</h4>
-            <h4>{avgRating}</h4>
-            <h4>{costForTwo}</h4>
-            <h4>{deliveryTime+" minuts"}</h4>
-        </div>
-    )
-}
-
-const Body=()=>{
-    return(
-        <div className="body-container">
-       <div className="search">Search</div>
-       <div className="restaurant-container">
-        {
-            restaurantList.map(restaurant=><RestaurantCard key={restaurant.info.id} resData={restaurant}></RestaurantCard>)
-        }
-        </div>
-        </div>
-
-    )
-}
-
-
-const Footer=()=>{
-    return(
-        <div className="footer">
-            <h3>Links</h3>
-            <h3> Company</h3>
-            <h3> Contact Us</h3>
-        </div>
-    )
-}
-const root=ReactDOM.createRoot(document.getElementById("root"))
-root.render(<AppLayout />)
+export default restaurantList

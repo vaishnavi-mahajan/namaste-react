@@ -68,8 +68,17 @@ height: 140px;
     width: 260px;
     height: 200px;
     border-radius: 10px;
-
 }
+
+.filter-btn{
+    padding: 10px;
+}
+
+.veg-btn{
+    padding: 10px;
+    
+}
+
 
 /*Footer*/
 .footer{

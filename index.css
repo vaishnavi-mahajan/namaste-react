@@ -133,6 +133,9 @@ height: 140px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
 
-
+.user-card{
+    padding: 10px;
+    border: solid black 1px;
 }

@@ -1,30 +1,33 @@
 import { useEffect, useState } from "react"
 import Shimmer from "./Shimmer"
 import { useParams } from "react-router-dom"
-import { MENU_API } from "../utils/constants"
+import useRestaurantMenu from "../utils/useRestaurantMenu"
 
 const RestaurantMenu=()=>{
-    [resInfo, setResInfo]=useState(null)
-    useEffect(()=>{
-        fetchMenu()
-    },[])
     const {resId}=useParams();
 
-    const fetchMenu=async()=>{
-        const data=await fetch(MENU_API+resId)
-        const json=await data.json()
-        setResInfo(json.data)
-    }
+    const resInfo=useRestaurantMenu(resId);
+
     
     if (resInfo===null) return <Shimmer />
-    const { name, cuisines, costForTwoMessage,avgRating,}=resInfo?.cards[0]?.card?.card?.info
+    const { name, cuisines, costForTwoMessage,avgRating,areaName}=resInfo?.cards[0]?.card?.card?.info
     const {itemCards}=resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+
+const indices = [0, 1, 2];
+
+const headers = indices.map(index => {
+  return resInfo?.cards[1].card.card.gridElements.infoWithStyle.offers[index]?.info.header;
+});
+// const resultString = headers.join("  ");
 
     return (
         <div className="menu">
             <h1>{name}</h1>
             <h4>{cuisines.join(",")}</h4>
+            <h4>{areaName}</h4>
+            <h4>{headers }</h4>
             <h3>{costForTwoMessage}</h3>
+
             <h3>{avgRating+" "+"Ratings"}</h3>
             <ul>
                 {itemCards.map((item)=>(<li key={item.card.info.id}>

@@ -1,17 +1,24 @@
 /*header*/
-.header{
-display: flex;
-justify-content: space-between;
-box-shadow: 0 3px 7px 0 rgba(0,0,0,.2);
-height: 140px;
+.header {
+  position: fixed; /* Fix the header at the top */
+  top: 0; /* Position at the top of the viewport */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.2);
+  height: 140px;
+  background-color: #fff; /* Set your desired background color */
+  z-index: 1000; /* Ensure the header appears above other content */
+  transition: background-color 0.3s ease; /* Add a smooth color transition */
 }
 
 .logo{
-    border-radius: 332px;
-    width: 120px;
-    margin: -21px 3px -12px 36px;
+    zoom: 220%;
+    border-radius: 319px;
+    width: 146px;
+    margin: -11px 3px -10px 25px;
     position: relative;
-    zoom: 142%;
 }
 
 .nav-items{
@@ -39,14 +46,15 @@ height: 140px;
 
 /*Body*/
 .body-container{
-    padding: 20px;
+    padding:  170px 20px;
 }
 
 .restaurant-container{
     display: flex;
     flex-wrap: wrap;
     margin: 5px;
-    padding: 15px;
+    /* padding: 15px; */
+    padding: 30px 127px;
 }
 
 .restaurant-card{
@@ -60,6 +68,7 @@ height: 140px;
     font-size: 16px;
     line-height: 15px;
     text-align: center; 
+    overflow-wrap: anywhere;
 }
 
 .restaurant-card:hover{
@@ -78,7 +87,7 @@ height: 140px;
     display: flex;
     flex-wrap: wrap;
     margin: 5px;
-    padding: 15px;
+    padding: 210px 150px;
 }
 .shimmer-cards{
     box-shadow: inset 0 0 3px gray; 
@@ -86,7 +95,7 @@ height: 140px;
     border: 1px;
     border-radius: 5px;
     width: 260px;
-    height: 400px;
+    height: 420px;
     padding: 15px;
     font-size: 16px;
     line-height: 15px;
@@ -122,9 +131,73 @@ height: 140px;
 
 .filter{
     display: flex;
-    justify-content: space-around;
+    gap: 30px; /* Set your desired gap size between filter items */
+    padding: 10px;
 }
 
+.filter-body{
+    display: flex;
+    justify-content: center; /* Horizontally center the .filter container */
+    align-items: center; /* Vertically center the .filter container */
+    height: 15vh; /* Set a specific height for the parent container */
+}
+
+.filter-btn{
+    height: 50px;
+    border-radius: 20px;
+    background-color: beige;
+}
+
+.fastDelivery-btn{
+    height: 50px;
+    border-radius: 20px;
+    background-color: beige;
+}
+
+.search-box{
+    width: 245px;
+    height: 39px;
+    border: thick solid;
+    border-radius: 50px;
+    font-size: large;
+}
+
+.search-button{
+    height: 50px;
+    border-radius: 20px;
+    background-color: beige;
+}
+
+/* Light Theme */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    /* Add more variables as needed */
+  }
+  
+  /* Dark Theme */
+  .dark-theme {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    /* Add more variables as needed */
+  }
+  
+  /* Apply styles to elements */
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    /* Other styles */
+  }
+
+.carasoul{
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 3px 7px 0 rgba(0,0,0,.2);
+    height: 140px;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    }
 
 /*Footer*/
 .footer{
@@ -138,4 +211,7 @@ height: 140px;
 .user-card{
     padding: 10px;
     border: solid black 1px;
+}
+.menu{
+    padding:  100px 500px;
 }

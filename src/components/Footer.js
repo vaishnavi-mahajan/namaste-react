@@ -1,11 +1,18 @@
-const Footer=()=>{
-    return(
-        <div className="footer">
-            <h3>Links</h3>
-            <h3> Company</h3>
-            <h3> Contact Us</h3>
-        </div>
-    )
-}
+const Footer = () => {
+  return (
+    <div className="footer">
+      <div class="w-full max-w-screen-2xl mx-auto p-2 md:py-2">
+        <hr class="my-6  bg-green-100 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          © 2023{" "}
+          <a href="https://flowbite.com/" class="hover:underline">
+            Flowbite™
+          </a>
+          . All Rights Reserved.
+        </span>
+      </div>
+    </div>
+  );
+};
 
-export default Footer
+export default Footer;

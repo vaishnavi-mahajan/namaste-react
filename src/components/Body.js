@@ -8,6 +8,8 @@ const Body = () => {
   const [ListOfRestaurant, setListOfRestaurant] = useState([]);
   const [Searchtext, setSerchtext] = useState("");
   const [filteRestaurant, setfilteRestaurant] = useState([]);
+  
+  console.log(ListOfRestaurant,"ListOfRestaurant")
   useEffect(() => {
     fetchData();
   }, []);
@@ -36,18 +38,18 @@ const Body = () => {
   ) : (
     <div className="body-container">
       <div className="filter-body">
-        <div className="filter">
-          <div className="search">
+        <div className="flex m-1 p-1 items-center justify-center ">
+          <div className="search m-4 p-2">
             <input
               type="text"
-              className="search-box"
+              className="border bold border-solid border-black 	border-width: 8px;"
               value={Searchtext}
               onChange={(event) => {
                 setSerchtext(event.target.value);
               }}></input>
 
             <button
-              className="search-button"
+              className="px-2 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
               onClick={() => {
                 const filteRestaurant = ListOfRestaurant.filter((res) =>
                   res.info.name.toLowerCase().includes(Searchtext.toLowerCase())
@@ -57,9 +59,9 @@ const Body = () => {
               Search
             </button>
           </div>
-
-          <button
-            className="filter-btn"
+          <div className="m-4 p-4 flex items-center">
+            <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
             onClick={() => {
               const FilteredListOfRestaurant = ListOfRestaurant.filter(
                 (res) => res.info.avgRating > 4
@@ -68,9 +70,10 @@ const Body = () => {
             }}>
             Rating 4.0+
           </button>
-
+          </div>
+         <div className="m-4 p-4 flex items-center">
           <button
-            className="fastDelivery-btn"
+             className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
             onClick={() => {
               // Sort the fastDelivery state in descending order by delivery time
               const sortedFastDelivery = [...ListOfRestaurant].sort(
@@ -81,9 +84,10 @@ const Body = () => {
             Fast Delivery
           </button>
         </div>
+        </div>
       </div>
 
-      <div className="restaurant-container">
+      <div className="flex flex-wrap bg">
         {filteRestaurant.map((restaurant) => (
           <Link
             key={restaurant.info.id}

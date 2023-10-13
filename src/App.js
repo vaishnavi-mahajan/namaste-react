@@ -9,18 +9,49 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 // import Grocery from "./components/Grocery";
-
 const Grocery = lazy(() => import("./components/Grocery"));
 
+import { useState,useEffect } from "react"
+
+// const toggletheme = () => {
+//   document.documentElement.classList.toggle("dark");
+// };
 const AppLayout = () => {
+  const [theme, setTheme] = useState("light"); // Set an initial theme (light).
+  
+  useEffect(() => {
+    // Check user's preferred color scheme.
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
+
+  useEffect(() => {
+    // Apply the theme class to the document's root element.
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+  
+  const handleThemeToggle = () => {
+    // Toggle between light and dark themes.
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <div className="applayout">
-      <Header />
+    <div className="right-6 ">
+    <div className={`bg-${theme === "dark" ? "black" : "white"}`}>
+      <div className="dark-mode-toggle" onClick={handleThemeToggle}>
+        {theme === "dark" ? "🌞" : "🌜"} {/* Use moon and sun emojis for dark mode */}
+      </div>
+      <Header theme={theme} />
       <Outlet />
-      <Footer />
+      <Footer theme={theme} />
+    </div>
     </div>
   );
 };
+
 
 const appRouter = createBrowserRouter([
   {

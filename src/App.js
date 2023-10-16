@@ -7,17 +7,16 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import UserContext from "./utils/UserContext";
 import RestaurantMenu from "./components/RestaurantMenu";
 // import Grocery from "./components/Grocery";
-const Grocery = lazy(() => import("./components/Grocery"));
-
 import { useState,useEffect } from "react"
 
-// const toggletheme = () => {
-//   document.documentElement.classList.toggle("dark");
-// };
+
+  const Grocery = lazy(() => import("./components/Grocery"));
 const AppLayout = () => {
   const [theme, setTheme] = useState("light"); // Set an initial theme (light).
+  const[userName,setUserName]=useState();
   
   useEffect(() => {
     // Check user's preferred color scheme.
@@ -38,20 +37,31 @@ const AppLayout = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+
+  useEffect(() => {
+    const data = {
+      name: "Vaishnavi Mahjan",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="right-6 ">
-    <div className={`bg-${theme === "dark" ? "black" : "white"}`}>
-      <div className="dark-mode-toggle" onClick={handleThemeToggle}>
-        {theme === "dark" ? "🌞" : "🌜"} {/* Use moon and sun emojis for dark mode */}
+    <div className="right-6">
+      <div className={`bg-${theme === "dark" ? "black" : "white"}`}>
+        <div className="dark-mode-toggle" onClick={handleThemeToggle}>
+          {theme === "dark" ? "🌞" : "🌜"}
+        </div>
+        <UserContext.Provider value={{ loggedInUser: userName }}>
+        </UserContext.Provider>
+          <Header theme={theme} />
+          <UserContext.Provider value={{ loggedInUser: "Newwwzi" }}>
+          </UserContext.Provider>
+          <Outlet />
+          <Footer theme={theme} />
       </div>
-      <Header theme={theme} />
-      <Outlet />
-      <Footer theme={theme} />
-    </div>
     </div>
   );
 };
-
 
 const appRouter = createBrowserRouter([
   {

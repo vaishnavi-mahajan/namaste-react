@@ -1,5 +1,7 @@
 import React from "react"
 import { GITHUB_API } from "../utils/constants";
+import UserContext from "../utils/UserContext";
+
 class UserClass extends React.Component{
     constructor(props){
         super(props)
@@ -24,6 +26,11 @@ class UserClass extends React.Component{
         const{name, repos_url}=this.state.userInfo
         return(
             <div className="user-card">
+                <h2>LoggedIn User
+                    <UserContext.Consumer>
+                    {({loggedInUser})=><h1>{loggedInUser}</h1>}
+                    </UserContext.Consumer>
+                </h2>
                 <h2>Github Name: {name}</h2>
                 {/* <h2>{count}</h2> */}
                 <h2>Github URL: {repos_url}</h2>

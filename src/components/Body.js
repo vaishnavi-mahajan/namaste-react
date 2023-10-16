@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withIsOpenLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -8,13 +8,15 @@ const Body = () => {
   const [ListOfRestaurant, setListOfRestaurant] = useState([]);
   const [Searchtext, setSerchtext] = useState("");
   const [filteRestaurant, setfilteRestaurant] = useState([]);
-  
-  console.log(ListOfRestaurant,"ListOfRestaurant")
+
+  console.log(ListOfRestaurant, "ListOfRestaurant");
+  const OpenRestaurantComponent = withIsOpenLabel(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.478849&lng=73.819062&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.478849&lng=73.819062&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     setListOfRestaurant(
@@ -61,38 +63,43 @@ const Body = () => {
           </div>
           <div className="m-4 p-4 flex items-center">
             <button
-            className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
-            onClick={() => {
-              const FilteredListOfRestaurant = ListOfRestaurant.filter(
-                (res) => res.info.avgRating > 4
-              );
-              setListOfRestaurant(FilteredListOfRestaurant);
-            }}>
-            Rating 4.0+
-          </button>
+              className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
+              onClick={() => {
+                const FilteredListOfRestaurant = ListOfRestaurant.filter(
+                  (res) => res.info.avgRating > 4
+                );
+                setListOfRestaurant(FilteredListOfRestaurant);
+              }}>
+              Rating 4.0+
+            </button>
           </div>
-         <div className="m-4 p-4 flex items-center">
-          <button
-             className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
-            onClick={() => {
-              // Sort the fastDelivery state in descending order by delivery time
-              const sortedFastDelivery = [...ListOfRestaurant].sort(
-                (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
-              );
-              setfilteRestaurant(sortedFastDelivery);
-            }}>
-            Fast Delivery
-          </button>
-        </div>
+          <div className="m-4 p-4 flex items-center">
+            <button
+              className="px-4 py-2 bg-green-100 m-4 rounded-xl font-bold text-lg"
+              onClick={() => {
+                // Sort the fastDelivery state in descending order by delivery time
+                const sortedFastDelivery = [...ListOfRestaurant].sort(
+                  (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
+                );
+                setfilteRestaurant(sortedFastDelivery);
+              }}>
+              Fast Delivery
+            </button>
+          </div>
         </div>
       </div>
 
       <div className="flex flex-wrap bg">
         {filteRestaurant.map((restaurant) => (
+          
           <Link
             key={restaurant.info.id}
             to={"/resturants/" + restaurant.info.id}>
-            <RestaurantCard resData={restaurant}></RestaurantCard>
+            {restaurant.info.isOpen ? (
+              <OpenRestaurantComponent resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant}></RestaurantCard>
+            )}
           </Link>
         ))}
       </div>

@@ -4,7 +4,7 @@ const RestaurantCard=({resData})=>{
     const {cloudinaryImageId,name,cuisines,avgRating,costForTwo,Veg}=resData?.info
     const {deliveryTime}=resData?.info?.sla
         return(
-            <div className="m-4 p-4 w-[300px] h-[450px] shadow-lg shadow-gray-350 break-words hover:bg-green-50 hover:cursor-pointer ">
+            <div className="m-4 p-4 w-[300px] h-[450px] shadow-lg shadow-gray-350 break-words hover:bg-green-50 hover:cursor-pointer">
               <img className="rounded-lg w-[300px] h-[200px]" 
               src={CDN_URL + cloudinaryImageId}>
               </img>
@@ -16,6 +16,18 @@ const RestaurantCard=({resData})=>{
                 <h4 className="font-thick  text-lg text-center">Deliver in {deliveryTime+" minuts"}</h4>
             </div>
         )
+    }
+
+    //Higher Order Component
+    export const withIsOpenLabel=(RestaurantCard)=>{
+        return(props)=>{
+            return(
+                <div>
+                    <label className="absolute bg-black text-white m-2 p-2 rounded-lg">Open</label>
+                    <RestaurantCard {...props}></RestaurantCard>
+                </div>
+            )
+        }
     }
 
 export default RestaurantCard
